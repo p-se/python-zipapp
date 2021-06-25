@@ -3,16 +3,12 @@
 set -ex
 
 # Pack
-python3 -m pip install -r requirements.txt --target packged
+python3 -m pip install -r requirements.txt --target packed
 # cp main file and other deps, but in this case, only main file
-cp -av server.py packged/__main__.py
-python3 -m zipapp -p python3 packged --compress
-mv packged.pyz server
-rm packged -rf
-
-# Check file's existence and file size
-sync
-du -h server
+cp -av server.py packed/__main__.py
+python3 -m zipapp -p python3 packed --compress
+mv packed.pyz server
+rm packed -rf
 
 if [ "$1" == "--container-test" ]; then
     # Run container with just Python3
