@@ -2,13 +2,15 @@
 import uvicorn
 from typing import Optional
 from fastapi import FastAPI
+from fastapi.responses import PlainTextResponse
+from yaml import dump
 
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("/", response_class=PlainTextResponse)
 def read_root():
-    return {"Hello": "World"}
+    return dump({"foo": {"bar": {"baz": 3}}})
 
 
 @app.get("/items/{item_id}")
